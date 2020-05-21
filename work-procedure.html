@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Work Procedure
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/javascripts/communicator_scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery-ui-1.9.2.custom.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/communicator_scripts/hoops_web_viewer.js?v=f8b8e66"
+        id="hwvScript"></script>
+    <script type="text/javascript" src="/javascripts/common.js"></script>
+    <script type="module" src="/javascripts/work_procedure.js"></script>
+    <script type="text/javascript" src="/javascripts/camera_control.js"></script>
+    <script type="text/javascript" src="/javascripts/animation_control.js"></script>
+    <script type="text/javascript" src="/javascripts/markups.js"></script>
+    <script type="text/javascript" src="/javascripts/subView_control.js"></script>
+    <script type="text/javascript" src="/javascripts/operators.js"></script>
+    <script type="text/javascript" src="/javascripts/animation_dialog.js"></script>
+    <script type="text/javascript" src="/javascripts/general_func.js"></script>
+
+    <link rel="stylesheet" href="/stylesheets/jquery-ui-1.9.2.custom.css" />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/work_procedure.css" />
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+
+    <script>
+        var language = browserLanguage();
+
+        var lang = getURLArgument("lang");
+        if (lang != undefined)
+            language = lang;
+        var workProc;
+    </script>
+    <script type="module">
+        import workProcedure from "/javascripts/work_procedure.js";
+
+        workProc = new workProcedure(language);
+        window.onload = function () { workProc.start(); };
+    </script>
+</head>
+
+<body>
+    <div id="header"><img src="/images/TS3D_logo.png"></div>
+
+    <div id="title">
+        パワーウィンドウスイッチの脱着
+    </div>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div id="a" class="col-md-7">
+                <img id="loadingImageMain" style="display: none;" src="/images/spinner2.gif"
+                    class="centerBlock" />
+                <div id="mainContainer"></div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div id="b" class="col-md-12">
+                        <img id="loadingImageSub" style="display: none;" src="/images/spinner2.gif"
+                            class="centerBlock" />
+                        <div id="subContainer"></div>
+                    </div>
+                    <div id="c" class="col-md-12">
+                        <div id="shoppingCart" class="table-responsive">
+                            <table id="shoppingCartTable" class="table table-striped table-hover table-condensed">
+                                <thead>
+                                    <tr style="text-align-last: center; color: #2482c6;">
+                                        <th class="partNumLabel" nowrap>部品番号</th>
+                                        <th class="partNameLabel" nowrap>名称</th>
+                                        <th class="partQtyLabel" nowrap>個数</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody style="color: #898989;">
+                                    <tr nowrap>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="samples">
+        <button id="legacyManual" class="btn btn-primary"
+            onclick="window.open('/images/manual.pdf')">従来のマニュアル</button>
+    </div>
+    <div id="footer">© Tech Soft 3D All Rights Reserved</div>
+    <div id="testButtons" style="display: none;">
+        <button id="saveCamera">Save Camera</button>
+        <button id="dumpNodes">Dump Nodes</button>
+        <button id="setTexture">Set Texture</button>
+    </div>
+    <div id="mainViewMark"><img src="/images/markSubTitle.png"></div>
+    <div id="mainViewTitle" class="subTitle">構成図と手順</div>
+    <div id="subViewMark"><img src="/images/markSubTitle.png"></div>
+    <div id="subViewTitle" class="subTitle">部品情報</div>
+    <div id="arrowMark"><img src="/images/markArrow.png"></div>
+    <button id="drawMode" class="btn btn-default">イラストレーション</button>
+    <input id="annimation" type="image" name="image_button" src="/images/BTN_CHECK_D_J.png" />
+    <div id="stepButtons">
+        <input id="explode" type="image" name="image_button" src="/images/BTN_PROCESS_ALL_R.png" />
+        <input id="step1" type="image" name="image_button" src="/images/BTN_PROCESS_1_N.png" />
+        <input id="step2" type="image" name="image_button" src="/images/BTN_PROCESS_2_N.png" />
+        <input id="step3" type="image" name="image_button" src="/images/BTN_PROCESS_3_N.png" />
+        <input id="step4" type="image" name="image_button" src="/images/BTN_PROCESS_4_N.png" />
+        <input id="step5" type="image" name="image_button" src="/images/BTN_PROCESS_5_N.png" />
+        <input id="step6" type="image" name="image_button" src="/images/BTN_PROCESS_6_N.png" />
+    </div>
+    <div id="annimationMark1"><img src="/images/markAnnimation.png" class="annimationMark"
+            style="display: none;"></div>
+    <div id="annimationMark3"><img src="/images/markAnnimation.png" class="annimationMark"
+            style="display: none;"></div>
+    <div id="slider" style="display: none;"></div>
+    <div id="partProperties">
+        <table id="partPropertyTable" class="table table-condensed">
+            <tbody>
+                <tr>
+                    <td class="partNumLabel" style="color: #2482c6;">部品番号</td>
+                    <td id="partNum" style="color: #898989;"></td>
+                </tr>
+                <tr>
+                    <td class="partNameLabel" style="color: #2482c6;">名称</td>
+                    <td id="partName" style="color: #898989;"></td>
+                </tr>
+                <tr>
+                    <td class="partPriceLabel" style="color: #2482c6;">価格</td>
+                    <td id="partPrice" style="color: #898989;"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input id="addCart" type="image" name="image_button" src="/images/BTN_ADDCART_N_J.png"
+        width="133px" height="36px" />
+    <input id="page-up" type="image" name="image_button" src="/images/page_up.png" />
+    <input id="page-down" type="image" name="image_button" src="/images/page_down.png" />
+    <div id="annDialog" style="display: none;">
+        <img id="loadingImage" style="display: none;" src="/images/spinner3.gif"
+            class="centerBlock" />
+        <div id="annContainer"></div>
+        <input id="startButton" style="display: none;" type="image" name="image_button"
+            src="/images/BTN_PLAY_N.png" class="centerBlock" />
+        <div id="annTestButtons" style="display: none;">
+            <button id="saveCamera2">Save Camera</button>
+            <button id="dumpNodes2">Dump Nodes</button>
+            <button id="test">Test</button>
+        </div>
+        <div id="annViewMark"><img src="/images/markSubTitle.png"></div>
+        <div id="annViewTitle" class="subTitle">詳細手順</div>
+        <input id="backButton" type="image" name="image_button" src="/images/BTN_BACK_N_J.png"
+            disabled="disabled" width="48px" height="48px" />
+        <div id="annButtons">
+            <input id="rewindButton" type="image" name="image_button"
+                src="/images/BTN_REWIND_N.png" disabled="disabled" />
+            <input id="playButton" type="image" name="image_button" src="/images/BTN_PLAY_N.png"
+                disabled="disabled" />
+            <input id="pauseButton" type="image" name="image_button" src="/images/BTN_PAUSE_N.png"
+                disabled="disabled" />
+        </div>
+        <div id="annSlider"></div>
+        <img id="doorClipImage" src="/images/kango1.gif" class="img-circle">
+        　
+    </div>
+    <div id="exportResult" style="display: none;"></div>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+.subTitle {
+    position:absolute;
+    font-size: 20px;
+    color: #898989;
+}
+.centerBlock{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: auto;
+}
+#header {
+    margin: 10px;
+    text-align: right;
+}
+#title {
+    height: 32px;
+    background-image: url(/images/title_bar.png);
+    font-size: 24px;
+    color: #ffffff;
+}
+#mainContainer {
+    height:550px;
+    background: #eeefef;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 1px;
+}
+#subContainer {
+    height:330px;
+    background: #eeefef;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 1px;
+}
+#annContainer {
+    background: #eeefef;
+    margin-top: -7px;
+    margin-left: -14px;
+}
+#shoppingCart {
+    height:180px;
+    background: #eeefef;
+    overflow-y: scroll;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+}
+#samples {
+    margin: 10px;
+    text-align: right;
+}
+#footer {
+    height: 20px;
+    background-color: #6d7172;
+    color: #ffffff;
+    text-align: center;
+}
+#mainViewMark,
+#subViewMark,
+#arrowMark,
+#drawMode,
+#stepButtons,
+#partProperties,
+#addCart {
+    position: absolute;
+}
+#annimation {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+}
+#annimationMark1,
+#annimationMark3 {
+    position: absolute;
+}
+img.annimationMark {
+    width: 22px;
+    height: 18px;
+}
+#slider {
+	position: absolute;
+    width:300px;
+}
+#a, #b, #c {
+    background: #ffffff;
+}
+#annViewMark,
+#backButton,
+#annButtons, 
+#annTestButtons {
+    position: absolute;
+}
+#annSlider {
+    position:absolute;
+    width: 240px;
+}
+#doorClipImage {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2);
+    border: solid;
+    border-color: #ff0000;
+}
+#step1,
+#step3 {
+    width: 43px;
+    height: 47px;
+}
+#step2,
+#step4,
+#step5,
+#step6 {
+    width: 39px;
+    height: 35px;
+}
+#explode {
+    width: 55px;
+    height: 35px;
+}
+#rewindButton,
+#playButton,
+#pauseButton {
+    width: 36px;
+    height: 36px;
+}
+#startButton {
+    width: 200px;
+    height: 200px;
+    opacity: 0.7;
+}
+#page-up
+{
+    position: absolute;
+	position: fixed;
+	right: 16px;
+	top: 38px;
+    opacity: 0.7;
+    display: none;
+}
+#page-down
+{
+    position: absolute;
+	position: fixed;
+	right: 16px;
+	bottom: 38px;
+    opacity: 0.7;
+    display: none;
+}
