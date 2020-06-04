@@ -470,16 +470,16 @@ workProcedure.prototype._loadPartProperties = function () {
 workProcedure.prototype._createMainViewer = function () {
     var _this = this;
 
-    var models = ["front_door_assy.scz"];
-    getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
-if (data == 'error: 429 - Too many requests') {
-            window.location.replace("/error/too-many-requests");
-        }
+    // var models = ["front_door_assy.scz"];
+    //  getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
+//  if (data == 'error: 429 - Too many requests') {
+//              window.location.replace("/error/too-many-requests");
+//          }
 
         _this._mainViewer = new Communicator.WebViewer({
             containerId: "mainContainer",
-            endpointUri: data.endpoint,
-            model: 'front_door_assy',
+            // endpointUri: data.endpoint,
+            model: '/model_data/front_door_assy.scs',
         });
 
         _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
@@ -508,7 +508,7 @@ if (data == 'error: 429 - Too many requests') {
         _this._mainViewer.getOperatorManager().push(mouseDragHandle);
         _this._mainViewer.getOperatorManager().push(_this._mouseOeratorHandle);
         _this._annimationCtrl = new annimationControl(_this._mainViewer);
-    });
+    // });
 
     function selectionFunc(selectionEvent) {
         var id = selectionEvent.getSelection().getNodeId();
@@ -564,16 +564,16 @@ workProcedure.prototype.enableDynamicHighlight = function () {
 
 workProcedure.prototype._createSubViewer = function () {
     var _this = this;
-    var models = ["front_door_assy.scz"];
-    getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
-        if (data == 'error: 429 - Too many requests') {
-            window.location.replace("/error/too-many-requests");
-        }
+    // var models = ["front_door_assy.scz"];
+    // getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
+    //     if (data == 'error: 429 - Too many requests') {
+    //         window.location.replace("/error/too-many-requests");
+    //     }
 
         _this._subViewer = new Communicator.WebViewer({
             containerId: "subContainer",
-            endpointUri: data.endpoint,
-            model: 'front_door_assy',
+            // endpointUri: data.endpoint,
+            model: 'model_data/front_door_assy.scs',
         });
 
         function modelStrReady() {
@@ -587,7 +587,7 @@ workProcedure.prototype._createSubViewer = function () {
             modelStructureReady: modelStrReady
         });
         _this._subViewer.start()
-    });
+    // });
 
     function sceneReadyFunc() {
         _this._subViewer.getView().setBackgroundColor(
