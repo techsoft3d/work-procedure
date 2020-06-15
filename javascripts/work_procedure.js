@@ -478,8 +478,7 @@ workProcedure.prototype._createMainViewer = function () {
 
         _this._mainViewer = new Communicator.WebViewer({
             containerId: "mainContainer",
-            // endpointUri: data.endpoint,
-            model: '/model_data/front_door_assy.scs',
+            endpointUri: '/model_data/front_door_combine_assy.scs',
         });
 
         _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
@@ -490,6 +489,7 @@ workProcedure.prototype._createMainViewer = function () {
         function modelStrReady() {
             _this._mainViewer.pauseRendering();
             _this.disableDynamicHighlight();
+            debugger;
             _this._annimationCtrl.explode(6, true);
             $("loadingImageMain").hide();
             setTimeout(function () {
@@ -572,8 +572,7 @@ workProcedure.prototype._createSubViewer = function () {
 
         _this._subViewer = new Communicator.WebViewer({
             containerId: "subContainer",
-            // endpointUri: data.endpoint,
-            model: 'model_data/front_door_assy.scs',
+            endpointUri: 'model_data/front_door_combine_assy.scs',
         });
 
         function modelStrReady() {
