@@ -19,7 +19,7 @@ function cameraControl(viewer) {
 
 cameraControl.prototype._loadCameraData = function () {
     var _this = this;  
-    var fileName = "/json/front_door_camera_positions.json?201701091002";
+    var fileName = "./json/front_door_camera_positions.json?201701091002";
     $.get(fileName, function () {
         $.getJSON(fileName, function (data) {
             if (data) {
