@@ -1,4 +1,4 @@
-import { getEndpoint } from "/javascripts/common/get_endpoint.js";
+import { getEndpoint } from "./../javascripts/common/get_endpoint.js";
 
 export default function workProcedure(language) {
     this._language = language;
@@ -16,11 +16,11 @@ export default function workProcedure(language) {
     this._annDialog;
     this._currentStep = 0;
     this._currentAnnimationStep = 8;
-    this._checkButton_D = "/images/BTN_CHECK_D_J.png";
-    this._checkButton_N = "/images/BTN_CHECK_N_J.png";
-    this._checkButton_P = "/images/BTN_CHECK_P_J.png";
-    this._addCartButton_N = "/images/BTN_ADDCART_N_J.png";
-    this._addCartButton_P = "/images/BTN_ADDCART_P_J.png";
+    this._checkButton_D = "./images/BTN_CHECK_D_J.png";
+    this._checkButton_N = "./images/BTN_CHECK_N_J.png";
+    this._checkButton_P = "./images/BTN_CHECK_P_J.png";
+    this._addCartButton_N = "./images/BTN_ADDCART_N_J.png";
+    this._addCartButton_P = "./images/BTN_ADDCART_P_J.png";
 }
 
 workProcedure.prototype.start = function () {
@@ -47,12 +47,12 @@ workProcedure.prototype._initResources = function () {
         $(".partQtyLabel").html("Qty");
         $("#addCart").prepend('<i class="glyphicon glyphicon-shopping-cart"></i>');
         $("#legacyManual").html("Legacy Manual");
-        _this._checkButton_D = "/images/BTN_CHECK_D.png";
-        _this._checkButton_N = "/images/BTN_CHECK_N.png";
-        _this._checkButton_P = "/images/BTN_CHECK_P.png";
+        _this._checkButton_D = "./images/BTN_CHECK_D.png";
+        _this._checkButton_N = "./images/BTN_CHECK_N.png";
+        _this._checkButton_P = "./images/BTN_CHECK_P.png";
         $("#annimation").attr("src", _this._checkButton_D);
-        _this._addCartButton_N = "/images/BTN_ADDCART_N.png";
-        _this._addCartButton_P = "/images/BTN_ADDCART_P.png";
+        _this._addCartButton_N = "./images/BTN_ADDCART_N.png";
+        _this._addCartButton_P = "./images/BTN_ADDCART_P.png";
         $("#addCart").attr("src", _this._addCartButton_N);
     }
 };
@@ -154,7 +154,7 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("explode");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_ALL_P.png";
+        this.src = "./images/BTN_PROCESS_ALL_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
@@ -162,12 +162,12 @@ workProcedure.prototype._initEvents = function () {
             _this._annimationCtrl.collapse();
             $("#slider").slider("value", 0);
             _this._currentAnnimationStep = 0;
-            this.src = "/images/BTN_PROCESS_ALL_N.png";
+            this.src = "./images/BTN_PROCESS_ALL_N.png";
         } else {
             _this._annimationCtrl.explode();
             $("#slider").slider("value", 8);
             _this._currentAnnimationStep = 8;
-            this.src = "/images/BTN_PROCESS_ALL_R.png";
+            this.src = "./images/BTN_PROCESS_ALL_R.png";
         }
         setTimeout(function () {
             postStepProcesses();
@@ -176,11 +176,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step1");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_1_P.png";
+        this.src = "./images/BTN_PROCESS_1_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_1_R.png";
+        this.src = "./images/BTN_PROCESS_1_R.png";
         _this._annimationCtrl.home();
         _this._annimationCtrl.step1();
         setTimeout(function () {
@@ -195,11 +195,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step2");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_2_P.png";
+        this.src = "./images/BTN_PROCESS_2_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_2_R.png";
+        this.src = "./images/BTN_PROCESS_2_R.png";
         if (_this._currentAnnimationStep > 0) {
             _this._annimationCtrl.home();
             _this._currentAnnimationStep = 0;
@@ -216,11 +216,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step3");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_3_P.png";
+        this.src = "./images/BTN_PROCESS_3_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_3_R.png";
+        this.src = "./images/BTN_PROCESS_3_R.png";
         if (_this._currentAnnimationStep > 0) {
             _this._annimationCtrl.home();
             _this._currentAnnimationStep = 0;
@@ -238,11 +238,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step4");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_4_P.png";
+        this.src = "./images/BTN_PROCESS_4_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_4_R.png";
+        this.src = "./images/BTN_PROCESS_4_R.png";
         if (_this._currentAnnimationStep > 0) {
             _this._annimationCtrl.home();
             _this._currentAnnimationStep = 0;
@@ -259,11 +259,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step5");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_5_P.png";
+        this.src = "./images/BTN_PROCESS_5_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_5_R.png";
+        this.src = "./images/BTN_PROCESS_5_R.png";
         if (_this._currentAnnimationStep > 0) {
             _this._annimationCtrl.home();
             _this._currentAnnimationStep = 0;
@@ -280,11 +280,11 @@ workProcedure.prototype._initEvents = function () {
 
     element = document.getElementById("step6");
     element.onmousedown = function () {
-        this.src = "/images/BTN_PROCESS_6_P.png";
+        this.src = "./images/BTN_PROCESS_6_P.png";
     };
     element.onclick = function () {
         preStepProcesses();
-        this.src = "/images/BTN_PROCESS_6_R.png";
+        this.src = "./images/BTN_PROCESS_6_R.png";
         if (_this._currentAnnimationStep > 0) {
             _this._annimationCtrl.home();
             _this._currentAnnimationStep = 0;
@@ -376,8 +376,8 @@ workProcedure.prototype._initEvents = function () {
                 var cell2 = row.insertCell(-1);
                 var cell3 = row.insertCell(-1);
                 var cell4 = row.insertCell(-1);
-                var plusButton = '<input type="image" name="image_button" onclick="incrementQty(this)" src="/images/BTN_PLUS_N.png" width="24px" height="24px"/>';
-                var minusButton = '<input type="image" name="image_button" onclick="decrementQty(this)" src="/images/BTN_MINUS_N.png" width="24px" height="24px"/>';
+                var plusButton = '<input type="image" name="image_button" onclick="incrementQty(this)" src="./images/BTN_PLUS_N.png" width="24px" height="24px"/>';
+                var minusButton = '<input type="image" name="image_button" onclick="decrementQty(this)" src="./images/BTN_MINUS_N.png" width="24px" height="24px"/>';
                 cell1.innerHTML = _this._partNum;
                 cell1.noWrap = true;
                 cell2.innerHTML = _this._partName;
@@ -397,13 +397,13 @@ workProcedure.prototype._initEvents = function () {
     function preStepProcesses() {
         _this.disableDynamicHighlight();
         $("#annimation").attr("src", _this._checkButton_D).prop("disabled", true);
-        $("#explode").attr("src", "/images/BTN_PROCESS_ALL_N.png").prop("disabled", true);
-        $("#step1").attr("src", "/images/BTN_PROCESS_1_N.png").prop("disabled", true);
-        $("#step2").attr("src", "/images/BTN_PROCESS_2_N.png").prop("disabled", true);
-        $("#step3").attr("src", "/images/BTN_PROCESS_3_N.png").prop("disabled", true);
-        $("#step4").attr("src", "/images/BTN_PROCESS_4_N.png").prop("disabled", true);
-        $("#step5").attr("src", "/images/BTN_PROCESS_5_N.png").prop("disabled", true);
-        $("#step6").attr("src", "/images/BTN_PROCESS_6_N.png").prop("disabled", true);
+        $("#explode").attr("src", "./images/BTN_PROCESS_ALL_N.png").prop("disabled", true);
+        $("#step1").attr("src", "./images/BTN_PROCESS_1_N.png").prop("disabled", true);
+        $("#step2").attr("src", "./images/BTN_PROCESS_2_N.png").prop("disabled", true);
+        $("#step3").attr("src", "./images/BTN_PROCESS_3_N.png").prop("disabled", true);
+        $("#step4").attr("src", "./images/BTN_PROCESS_4_N.png").prop("disabled", true);
+        $("#step5").attr("src", "./images/BTN_PROCESS_5_N.png").prop("disabled", true);
+        $("#step6").attr("src", "./images/BTN_PROCESS_6_N.png").prop("disabled", true);
     }
 
     function postStepProcesses(current) {
@@ -462,7 +462,7 @@ workProcedure.prototype._initEvents = function () {
 
 workProcedure.prototype._loadPartProperties = function () {
     var _this = this;
-    $.getJSON("/json/front_door_part_properties.json", function (data) {
+    $.getJSON("./json/front_door_part_properties.json", function (data) {
         _this._partPropertyData = data;
     });
 };
@@ -478,7 +478,7 @@ workProcedure.prototype._createMainViewer = function () {
 
         _this._mainViewer = new Communicator.WebViewer({
             containerId: "mainContainer",
-            endpointUri: '/model_data/front_door_assy.scs',
+            endpointUri: './model_data/front_door_assy.scs',
         });
 
         _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
@@ -489,7 +489,6 @@ workProcedure.prototype._createMainViewer = function () {
         function modelStrReady() {
             _this._mainViewer.pauseRendering();
             _this.disableDynamicHighlight();
-            debugger;
             _this._annimationCtrl.explode(6, true);
             $("loadingImageMain").hide();
             setTimeout(function () {
@@ -572,7 +571,7 @@ workProcedure.prototype._createSubViewer = function () {
 
         _this._subViewer = new Communicator.WebViewer({
             containerId: "subContainer",
-            endpointUri: 'model_data/front_door_assy.scs',
+            endpointUri: './model_data/front_door_assy.scs',
         });
 
         function modelStrReady() {
