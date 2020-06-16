@@ -17,7 +17,7 @@
 }
 #title {
     height: 32px;
-    background-image: url(./images/title_bar.png);
+    background-image: url(./../images/title_bar.png);
     font-size: 24px;
     color: #ffffff;
 }
