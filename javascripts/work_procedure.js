@@ -478,7 +478,7 @@ workProcedure.prototype._createMainViewer = function () {
 
         _this._mainViewer = new Communicator.WebViewer({
             containerId: "mainContainer",
-            endpointUri: '/model_data/front_door_combine_assy.scs',
+            endpointUri: '/model_data/front_door_assy.scs',
         });
 
         _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
@@ -572,7 +572,7 @@ workProcedure.prototype._createSubViewer = function () {
 
         _this._subViewer = new Communicator.WebViewer({
             containerId: "subContainer",
-            endpointUri: 'model_data/front_door_combine_assy.scs',
+            endpointUri: 'model_data/front_door_assy.scs',
         });
 
         function modelStrReady() {
