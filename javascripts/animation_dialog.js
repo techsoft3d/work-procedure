@@ -6,13 +6,13 @@ function annimationDialog(language, target) {
     this._currentStep = 0;
     this._annimationCtrl;
     this._targetStep = target;
-    this._backButton_N = "/images/BTN_BACK_N_J.png";
-    this._backButton_P = "/images/BTN_BACK_P_J.png";
+    this._backButton_N = "./images/BTN_BACK_N_J.png";
+    this._backButton_P = "./images/BTN_BACK_P_J.png";
 
     if (language != "ja") {
         $("#annViewTitle").html("Detailed Procedure");
-        _this._backButton_N = "/images/BTN_BACK_N.png";
-        _this._backButton_P = "/images/BTN_BACK_P.png";
+        _this._backButton_N = "./images/BTN_BACK_N.png";
+        _this._backButton_P = "./images/BTN_BACK_P.png";
         $("#backButton").attr("src", _this._backButton_N);
     }
 
@@ -132,10 +132,8 @@ annimationDialog.prototype._initViewer = function () {
             endpointUri: './model_data/front_door_assy.scs', //data.endpoint,
            // model: 'front_door_assy',
         });
-        debugger;
+
         function modelStrReady() {
-            console.log("in modelStrRead")
-            debugger;
             var model = _this._annimationViewer.getModel();
             var root = model.getRootNode();
             var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
