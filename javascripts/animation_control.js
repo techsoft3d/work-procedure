@@ -742,7 +742,7 @@ annimationControl.prototype.detail1_explode = function (targetStep) {
     if (_this._currentAnnimationStep == counter++) {
         setTimeout(function () {
             var gifImage = document.getElementById("doorClipImage");
-            gifImage.src = "/images/kango1.gif?" + (new Date).getTime();
+            gifImage.src = "./images/kango1.gif?" + (new Date).getTime();
             $("#doorClipImage").show();
         }, waitTime);
 
@@ -831,7 +831,7 @@ annimationControl.prototype.detail1_explode = function (targetStep) {
     if (_this._currentAnnimationStep == counter++) {
         setTimeout(function () {
             var gifImage = document.getElementById("doorClipImage");
-            gifImage.src = "/images/kango2.gif?" + (new Date).getTime();
+            gifImage.src = "./images/kango2.gif?" + (new Date).getTime();
             $("#doorClipImage").show();
         }, waitTime);
 
@@ -917,7 +917,7 @@ annimationControl.prototype.detail1_explode = function (targetStep) {
     if (_this._currentAnnimationStep == counter++) {
         setTimeout(function () {
             var gifImage = document.getElementById("doorClipImage");
-            gifImage.src = "/images/kango3.gif?" + (new Date).getTime();
+            gifImage.src = "./images/kango3.gif?" + (new Date).getTime();
             $("#doorClipImage").show();
         }, waitTime);
 
@@ -1012,7 +1012,7 @@ annimationControl.prototype.detail3_explode = function (targetStep) {
     if (_this._currentAnnimationStep == counter++) {
         setTimeout(function () {
             var gifImage = document.getElementById("doorClipImage");
-            gifImage.src = "/images/kango4.gif?" + (new Date).getTime();
+            gifImage.src = "./images/kango4.gif?" + (new Date).getTime();
             $("#doorClipImage").show();
         }, waitTime);
 
@@ -1268,7 +1268,7 @@ annimationControl.prototype.detail3_explode = function (targetStep) {
     if (_this._currentAnnimationStep == counter++) {
         setTimeout(function () {
             var gifImage = document.getElementById("doorClipImage");
-            gifImage.src = "/images/kango5.gif?" + (new Date).getTime();
+            gifImage.src = "./images/kango5.gif?" + (new Date).getTime();
             $("#doorClipImage").show();
         }, waitTime);
 

@@ -120,7 +120,7 @@ const getEndpoint = (args) => {
 
 annimationDialog.prototype._initViewer = function () {
     var _this = this;
-    var models = ["./model_data/front_door_assy.scs", "./model_data/flathead_screwdriver.scs", './model_data/clip_remover.scs', './model_data/LH_hand.scs', './model_data/RH_hand.scs'];
+  //  var models = ["./model_data/front_door_assy.scs", "./model_data/flathead_screwdriver.scs", './model_data/clip_remover.scs', './model_data/LH_hand.scs', './model_data/RH_hand.scs'];
     //var models = ["front_door_assy.scz", "flathead_screwdriver.scz", 'clip_remover.scz', 'LH_hand.scz', 'RH_hand.scz'];
     // getEndpoint({ type: "collection", models: models, initial: "front_door_assy.scs" }).then((data) => {
     //     if (data === 'error: 429 - Too many requests') {
