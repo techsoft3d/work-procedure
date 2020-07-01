@@ -120,29 +120,32 @@ const getEndpoint = (args) => {
 
 annimationDialog.prototype._initViewer = function () {
     var _this = this;
-    var models = ["front_door_assy.scz", "flathead_screwdriver.scz", 'clip_remover.scz', 'LH_hand.scz', 'RH_hand.scz'];
-    getEndpoint({ type: "collection", models: models, initial: "front_door_assy.scz" }).then((data) => {
-        if (data === 'error: 429 - Too many requests') {
-            window.location.replace("/error/too-many-requests");
-        }
+    var models = ["./model_data/front_door_assy.scs", "./model_data/flathead_screwdriver.scs", './model_data/clip_remover.scs', './model_data/LH_hand.scs', './model_data/RH_hand.scs'];
+    //var models = ["front_door_assy.scz", "flathead_screwdriver.scz", 'clip_remover.scz', 'LH_hand.scz', 'RH_hand.scz'];
+    // getEndpoint({ type: "collection", models: models, initial: "front_door_assy.scs" }).then((data) => {
+    //     if (data === 'error: 429 - Too many requests') {
+    //         window.location.replace("/error/too-many-requests");
+    //     }
 
         _this._annimationViewer = new Communicator.WebViewer({
             containerId: "annContainer",
-            endpointUri: data.endpoint,
-            model: 'front_door_assy',
+            endpointUri: './model_data/front_door_assy.scs', //data.endpoint,
+           // model: 'front_door_assy',
         });
-
+        debugger;
         function modelStrReady() {
+            console.log("in modelStrRead")
+            debugger;
             var model = _this._annimationViewer.getModel();
             var root = model.getRootNode();
             var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
             var removerNode = model.createNode(root, "clip_remover", undefined, undefined, false);
             var leftHandNode = model.createNode(root, "LH_hand", undefined, undefined, false);
             var rightHandNode = model.createNode(root, "RH_hand", undefined, undefined, false);
-            model.loadSubtreeFromModel(screwNode, "flathead_screwdriver").then(function () {
-                model.loadSubtreeFromModel(removerNode, "clip_remover").then(function () {
-                    model.loadSubtreeFromModel(leftHandNode, "LH_hand").then(function () {
-                        model.loadSubtreeFromModel(rightHandNode, "RH_hand").then(function () {
+            model.loadSubtreeFromScsFile(screwNode, "./model_data/flathead_screwdriver.scs").then(function () {
+                model.loadSubtreeFromScsFile(removerNode, "./model_data/clip_remover.scs").then(function () {
+                    model.loadSubtreeFromScsFile(leftHandNode, "./model_data/LH_hand.scs").then(function () {
+                        model.loadSubtreeFromScsFile(rightHandNode, "./model_data/RH_hand.scs").then(function () {
                             _this._annimationCtrl.setToolNodeID(screwNode, removerNode, leftHandNode, rightHandNode);
                             _this._annimationCtrl.home(_this._targetStep);
                             _this._postAnnimation();
@@ -162,7 +165,7 @@ annimationDialog.prototype._initViewer = function () {
         _this._annimationCtrl = new annimationControl(_this._annimationViewer);
 
         window.onbeforeunload = () => { $.get('/api/delete_collection?collection=' + [data.collection_id]); };
-    });
+   // });
 
     function sceneReadyFunc() {
         _this._dialogResize();
