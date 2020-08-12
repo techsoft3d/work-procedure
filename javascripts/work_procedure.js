@@ -1,4 +1,3 @@
-import { getEndpoint } from "./../javascripts/common/get_endpoint.js";
 
 export default function workProcedure(language) {
     this._language = language;
@@ -449,8 +448,8 @@ workProcedure.prototype._initEvents = function () {
             clearTimeout(timer);
         }
         timer = setTimeout(function () {
-            workProcedure.resizeCanvas();
-            workProcedure.layoutPage();
+            _this.resizeCanvas();
+            _this.layoutPage();
         }, 200);
     });
 

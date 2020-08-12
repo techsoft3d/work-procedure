@@ -130,7 +130,7 @@ annimationDialog.prototype._initViewer = function () {
         _this._annimationViewer = new Communicator.WebViewer({
             containerId: "annContainer",
             endpointUri: './model_data/front_door_assy.scs', //data.endpoint,
-           // model: 'front_door_assy',
+           model: 'front_door_assy',
         });
 
         function modelStrReady() {
