@@ -615,7 +615,7 @@ workProcedure.prototype.showPartProperties = function (partID) {
     }
     var camera = _this._mainViewer.getView().getCamera();
     _this._subViewCtrl.showParts(nodeIDs, camera);
-}
+};
 
 workProcedure.prototype.clearSelection = function () {
     var _this = this;
