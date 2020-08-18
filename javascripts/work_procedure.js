@@ -309,7 +309,9 @@ workProcedure.prototype._initEvents = function () {
         if (_this._annDialog == undefined) {
             _this._annDialog = new annimationDialog(_this._language, _this._currentStep);
         }
-        _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep);
+        //Need to somehow delay this until AFTER sceneReadyFunc in animation_dialog runs.
+        //It's throwing undefined errors to console if it runs to early.
+        _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep); 
     };
 
     $("#slider").slider({

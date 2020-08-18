@@ -18,9 +18,10 @@ function annimationDialog(language, target) {
 
     $("#startButton").hide();
     $("#loadingImage").show();
-    _this._initDialog();
+    //_this._initDialog();
     _this._initEvent();
     _this._initViewer();
+    _this._initDialog();
 }
 
 annimationDialog.prototype._initDialog = function () {
@@ -102,24 +103,7 @@ annimationDialog.prototype._initEvent = function () {
     }
 };
 
-// hack this in because the global state is an utter mess in this demo
-const getEndpoint = (args) => {
-    return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        request.open("POST", "/api/request_session");
-        request.setRequestHeader("Content-Type", "application/json");
-        request.onload = () => {
-            if (request.status != 200) {
-                reject(`ERROR: ${request.responseText}`)
-            }
-            resolve(JSON.parse(request.responseText));
-        }
-        request.send(JSON.stringify(args));
-    });
- };// No different from original version?
-
 annimationDialog.prototype._initViewer = function () {
-    debugger;
     var _this = this;
 
     _this._annimationViewer = new Communicator.WebViewer({
@@ -127,9 +111,8 @@ annimationDialog.prototype._initViewer = function () {
         endpointUri: './model_data/front_door_assy.scs', 
     });
 
-    function modelStrReady() { //THIS is never called.
-        debugger;
-        var model = _this._annimationViewer.getModel(); //Should be no different than workprocedure at this point.
+    function modelStrReady() { 
+        var model = _this._annimationViewer.getModel(); 
         var root = model.getRootNode(); 
         var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
         var removerNode = model.createNode(root, "clip_remover", undefined, undefined, false);
@@ -149,7 +132,7 @@ annimationDialog.prototype._initViewer = function () {
         });
     }
 
-    _this._annimationViewer.setCallbacks({ //Need to find out what this does? DEBUGGER
+    _this._annimationViewer.setCallbacks({ 
         sceneReady: sceneReadyFunc,
         modelStructureReady: modelStrReady
     });
@@ -157,9 +140,8 @@ annimationDialog.prototype._initViewer = function () {
     _this._annimationViewer.start()
     _this._annimationCtrl = new annimationControl(_this._annimationViewer);
 
-    function sceneReadyFunc() { //THIS is never called
-        debugger;
-        console.log("scene ready in animationViiewer"); //DEBUGGER
+    function sceneReadyFunc() { 
+        console.log("sceneReadyFunc");
         _this._dialogResize();
         _this._annimationCtrl.cameraHome();
         _this._annimationViewer.getView().setBackgroundColor(
@@ -195,7 +177,6 @@ annimationDialog.prototype.open = function (w, h, target) {
         width: w,
         height: h
     })
-    debugger;
     _this._annDialog.dialog("open");
     _this._currentStep = 0;
     if (_this._annimationCtrl != undefined)
@@ -205,10 +186,8 @@ annimationDialog.prototype.open = function (w, h, target) {
 };
 
 annimationDialog.prototype._dialogResize = function () {
-    debugger;
     var _this = this;
     if (_this._annimationViewer != undefined) {
-        console.log(_this._annimationViewer); //DEBUGGER statement
         _this._annimationViewer.resizeCanvas();
     }
     var annHeight = $('#annDialog').innerHeight();
