@@ -310,8 +310,14 @@ workProcedure.prototype._initEvents = function () {
             _this._annDialog = new annimationDialog(_this._language, _this._currentStep);
         }
         //Need to somehow delay this until AFTER sceneReadyFunc in animation_dialog runs.
-        //It's throwing undefined errors to console if it runs to early.
-        _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep); 
+        //It's throwing undefined errors to console if it runs to early. Try timeout?
+        //Works with 300 ms, try with 100 ms (Also fixed broken button for some reason?)
+        //Fails with 100 ms delay. 
+        setTimeout(()=>{
+            _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep);
+        },
+         300);
+         
     };
 
     $("#slider").slider({
@@ -389,11 +395,20 @@ workProcedure.prototype._initEvents = function () {
                 cell4.innerHTML = plusButton + minusButton;
                 cell4.noWrap = true;
                 row.id = _this._partID;
-                row.onclick = cartRowSelection;
                 _this._controlScrollButtons();
+                // row.onclick = cartRowSelection();                
             }
         }
     };
+
+    // function cartRowSelection() {
+    //     var tr = this;
+    //     _this.clearSelection();
+    //     _this.showPartProperties(_this.id);
+    //     _this.clearTableRowColor()
+    //     _this.style.color = "#000000";
+    //    _this.style.backgroundColor = "#ff8080";
+    // }
 
     function preStepProcesses() {
         _this.disableDynamicHighlight();
@@ -662,33 +677,4 @@ workProcedure.prototype._controlScrollButtons = function () {
     }
 };
 
-// These were moved to general_functions 
-//Because work-procedure is a module and did not export them.
-// function incrementQty(obj) {
-//     var tr = obj.parentNode.parentNode;
-//     var childlen = tr.childNodes;
-//     var qty = childlen[2].innerHTML;
-//     qty++;
-//     childlen[2].innerHTML = qty;
-// }
 
-// function decrementQty(obj) {
-//     var tr = obj.parentNode.parentNode;
-//     var childlen = tr.childNodes;
-//     var qty = childlen[2].innerHTML;
-//     if (qty == 1) {
-//         tr.parentNode.deleteRow(tr.sectionRowIndex);
-//     } else {
-//         qty--;
-//         childlen[2].innerHTML = qty;
-//     }
-// }
-
-function cartRowSelection() {
-    var tr = this;
-    workProcedure.clearSelection();
-    workProcedure.showPartProperties(tr.id);
-    workProcedure.clearTableRowColor()
-    tr.style.color = "#000000";
-    tr.style.backgroundColor = "#ff8080";
-}
