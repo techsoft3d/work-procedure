@@ -18,7 +18,6 @@ function annimationDialog(language, target) {
 
     $("#startButton").hide();
     $("#loadingImage").show();
-    //_this._initDialog();
     _this._initEvent();
     _this._initViewer();
     _this._initDialog();
@@ -112,6 +111,7 @@ annimationDialog.prototype._initViewer = function () {
     });
 
     function modelStrReady() { 
+        console.log("modelStrReady");
         var model = _this._annimationViewer.getModel(); 
         var root = model.getRootNode(); 
         var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
