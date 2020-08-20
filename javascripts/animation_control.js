@@ -310,6 +310,10 @@ annimationControl.prototype.cameraHome = function () {
 
 annimationControl.prototype.home = function (target) {
     var _this = this;
+    if(_this._viewer.model._firstModelRootId == -1) { // breaks out of function if model hasn't been built by sceneReadyFunc yet.
+        console.log("Returning from annimationControl.home as modelStrReady isn't built yet");
+        return;
+    }
     _this._viewer.getModel().setNodesHighlighted(_this._nodeTopID, false);
     _this._viewer.getModel().reset();
     _this._viewer.getModel().resetModelTransparency();

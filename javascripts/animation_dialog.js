@@ -18,9 +18,9 @@ function annimationDialog(language, target) {
 
     $("#startButton").hide();
     $("#loadingImage").show();
-    _this._initDialog();
     _this._initEvent();
     _this._initViewer();
+    _this._initDialog();
 }
 
 annimationDialog.prototype._initDialog = function () {
@@ -102,70 +102,46 @@ annimationDialog.prototype._initEvent = function () {
     }
 };
 
-// hack this in because the global state is an utter mess in this demo
-const getEndpoint = (args) => {
-    return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        request.open("POST", "/api/request_session");
-        request.setRequestHeader("Content-Type", "application/json");
-        request.onload = () => {
-            if (request.status != 200) {
-                reject(`ERROR: ${request.responseText}`)
-            }
-            resolve(JSON.parse(request.responseText));
-        }
-        request.send(JSON.stringify(args));
-    });
-}
-
 annimationDialog.prototype._initViewer = function () {
     var _this = this;
-  //  var models = ["./model_data/front_door_assy.scs", "./model_data/flathead_screwdriver.scs", './model_data/clip_remover.scs', './model_data/LH_hand.scs', './model_data/RH_hand.scs'];
-    //var models = ["front_door_assy.scz", "flathead_screwdriver.scz", 'clip_remover.scz', 'LH_hand.scz', 'RH_hand.scz'];
-    // getEndpoint({ type: "collection", models: models, initial: "front_door_assy.scs" }).then((data) => {
-    //     if (data === 'error: 429 - Too many requests') {
-    //         window.location.replace("/error/too-many-requests");
-    //     }
 
-        _this._annimationViewer = new Communicator.WebViewer({
-            containerId: "annContainer",
-            endpointUri: './model_data/front_door_assy.scs', //data.endpoint,
-           // model: 'front_door_assy',
-        });
+    _this._annimationViewer = new Communicator.WebViewer({
+        containerId: "annContainer",
+        endpointUri: './model_data/front_door_assy.scs', 
+    });
 
-        function modelStrReady() {
-            var model = _this._annimationViewer.getModel();
-            var root = model.getRootNode();
-            var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
-            var removerNode = model.createNode(root, "clip_remover", undefined, undefined, false);
-            var leftHandNode = model.createNode(root, "LH_hand", undefined, undefined, false);
-            var rightHandNode = model.createNode(root, "RH_hand", undefined, undefined, false);
-            model.loadSubtreeFromScsFile(screwNode, "./model_data/flathead_screwdriver.scs").then(function () {
-                model.loadSubtreeFromScsFile(removerNode, "./model_data/clip_remover.scs").then(function () {
-                    model.loadSubtreeFromScsFile(leftHandNode, "./model_data/LH_hand.scs").then(function () {
-                        model.loadSubtreeFromScsFile(rightHandNode, "./model_data/RH_hand.scs").then(function () {
-                            _this._annimationCtrl.setToolNodeID(screwNode, removerNode, leftHandNode, rightHandNode);
-                            _this._annimationCtrl.home(_this._targetStep);
-                            _this._postAnnimation();
-                            $("#startButton").show();
-                        });
+    function modelStrReady() { 
+        console.log("modelStrReady");
+        var model = _this._annimationViewer.getModel(); 
+        var root = model.getRootNode(); 
+        var screwNode = model.createNode(root, "flathead_screwdriver", undefined, undefined, false);
+        var removerNode = model.createNode(root, "clip_remover", undefined, undefined, false);
+        var leftHandNode = model.createNode(root, "LH_hand", undefined, undefined, false);
+        var rightHandNode = model.createNode(root, "RH_hand", undefined, undefined, false);
+        model.loadSubtreeFromScsFile(screwNode, "./model_data/flathead_screwdriver.scs").then(function () {
+            model.loadSubtreeFromScsFile(removerNode, "./model_data/clip_remover.scs").then(function () {
+                model.loadSubtreeFromScsFile(leftHandNode, "./model_data/LH_hand.scs").then(function () {
+                    model.loadSubtreeFromScsFile(rightHandNode, "./model_data/RH_hand.scs").then(function () {
+                        _this._annimationCtrl.setToolNodeID(screwNode, removerNode, leftHandNode, rightHandNode);
+                        _this._annimationCtrl.home(_this._targetStep);
+                        _this._postAnnimation();
+                        $("#startButton").show();
                     });
                 });
             });
-        }
-
-        _this._annimationViewer.setCallbacks({
-            sceneReady: sceneReadyFunc,
-            modelStructureReady: modelStrReady
         });
+    }
 
-        _this._annimationViewer.start()
-        _this._annimationCtrl = new annimationControl(_this._annimationViewer);
+    _this._annimationViewer.setCallbacks({ 
+        sceneReady: sceneReadyFunc,
+        modelStructureReady: modelStrReady
+    });
 
-        window.onbeforeunload = () => { $.get('/api/delete_collection?collection=' + [data.collection_id]); };
-   // });
+    _this._annimationViewer.start()
+    _this._annimationCtrl = new annimationControl(_this._annimationViewer);
 
-    function sceneReadyFunc() {
+    function sceneReadyFunc() { 
+        console.log("sceneReadyFunc");
         _this._dialogResize();
         _this._annimationCtrl.cameraHome();
         _this._annimationViewer.getView().setBackgroundColor(
@@ -211,8 +187,9 @@ annimationDialog.prototype.open = function (w, h, target) {
 
 annimationDialog.prototype._dialogResize = function () {
     var _this = this;
-    if (_this._annimationViewer != undefined)
+    if (_this._annimationViewer != undefined) {
         _this._annimationViewer.resizeCanvas();
+    }
     var annHeight = $('#annDialog').innerHeight();
     var annWidth = $('#annDialog').innerWidth();
     var annOffset = $("#annContainer").offset();

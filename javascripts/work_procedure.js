@@ -1,4 +1,3 @@
-import { getEndpoint } from "./../javascripts/common/get_endpoint.js";
 
 export default function workProcedure(language) {
     this._language = language;
@@ -310,7 +309,15 @@ workProcedure.prototype._initEvents = function () {
         if (_this._annDialog == undefined) {
             _this._annDialog = new annimationDialog(_this._language, _this._currentStep);
         }
-        _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep);
+        //Need to somehow delay this until AFTER sceneReadyFunc in animation_dialog runs.
+        //It's throwing undefined errors to console if it runs to early. Try timeout?
+        //Works with 300 ms, try with 100 ms (Also fixed broken button for some reason?)
+        //Fails with 100 ms delay. 
+        setTimeout(()=>{
+            _this._annDialog.open(window.innerWidth, window.innerHeight, _this._currentStep);
+        },
+         300);
+         
     };
 
     $("#slider").slider({
@@ -388,11 +395,20 @@ workProcedure.prototype._initEvents = function () {
                 cell4.innerHTML = plusButton + minusButton;
                 cell4.noWrap = true;
                 row.id = _this._partID;
-                row.onclick = cartRowSelection;
                 _this._controlScrollButtons();
+                // row.onclick = cartRowSelection();                
             }
         }
     };
+
+    // function cartRowSelection() {
+    //     var tr = this;
+    //     _this.clearSelection();
+    //     _this.showPartProperties(_this.id);
+    //     _this.clearTableRowColor()
+    //     _this.style.color = "#000000";
+    //    _this.style.backgroundColor = "#ff8080";
+    // }
 
     function preStepProcesses() {
         _this.disableDynamicHighlight();
@@ -449,8 +465,8 @@ workProcedure.prototype._initEvents = function () {
             clearTimeout(timer);
         }
         timer = setTimeout(function () {
-            workProcedure.resizeCanvas();
-            workProcedure.layoutPage();
+            _this.resizeCanvas();
+            _this.layoutPage();
         }, 200);
     });
 
@@ -470,44 +486,38 @@ workProcedure.prototype._loadPartProperties = function () {
 workProcedure.prototype._createMainViewer = function () {
     var _this = this;
 
-    // var models = ["front_door_assy.scz"];
-    //  getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
-//  if (data == 'error: 429 - Too many requests') {
-//              window.location.replace("/error/too-many-requests");
-//          }
 
-        _this._mainViewer = new Communicator.WebViewer({
-            containerId: "mainContainer",
-            endpointUri: './model_data/front_door_assy.scs',
-        });
+    _this._mainViewer = new Communicator.WebViewer({
+        containerId: "mainContainer",
+        endpointUri: './model_data/front_door_assy.scs',
+    });
 
-        _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
-        _this._mouseOeratorHandle = _this._mainViewer.registerCustomOperator(_this._mouseOverOperator);
-        var mouseDragOp = new mouseDragOperator();
-        var mouseDragHandle = _this._mainViewer.registerCustomOperator(mouseDragOp);
+    _this._mouseOverOperator = new mouseOverOperator(_this._mainViewer);
+    _this._mouseOeratorHandle = _this._mainViewer.registerCustomOperator(_this._mouseOverOperator);
+    var mouseDragOp = new mouseDragOperator();
+    var mouseDragHandle = _this._mainViewer.registerCustomOperator(mouseDragOp);
 
-        function modelStrReady() {
-            _this._mainViewer.pauseRendering();
-            _this.disableDynamicHighlight();
-            _this._annimationCtrl.explode(6, true);
-            $("loadingImageMain").hide();
-            setTimeout(function () {
-                _this._mainViewer.resumeRendering();
-                _this.enableDynamicHighlight();
-            }, 3000);
-        }
+    function modelStrReady() {
+        _this._mainViewer.pauseRendering();
+        _this.disableDynamicHighlight();
+        _this._annimationCtrl.explode(6, true);
+        $("loadingImageMain").hide();
+        setTimeout(function () {
+            _this._mainViewer.resumeRendering();
+            _this.enableDynamicHighlight();
+        }, 3000);
+    }
 
-        _this._mainViewer.setCallbacks({
-            selection: selectionFunc,
-            sceneReady: sceneReadyFunc,
-            modelStructureReady: modelStrReady
-        });
+    _this._mainViewer.setCallbacks({
+        selection: selectionFunc,
+        sceneReady: sceneReadyFunc,
+        modelStructureReady: modelStrReady
+    });
 
-        _this._mainViewer.start();
-        _this._mainViewer.getOperatorManager().push(mouseDragHandle);
-        _this._mainViewer.getOperatorManager().push(_this._mouseOeratorHandle);
-        _this._annimationCtrl = new annimationControl(_this._mainViewer);
-    // });
+    _this._mainViewer.start();
+    _this._mainViewer.getOperatorManager().push(mouseDragHandle);
+    _this._mainViewer.getOperatorManager().push(_this._mouseOeratorHandle);
+    _this._annimationCtrl = new annimationControl(_this._mainViewer);
 
     function selectionFunc(selectionEvent) {
         var id = selectionEvent.getSelection().getNodeId();
@@ -563,29 +573,23 @@ workProcedure.prototype.enableDynamicHighlight = function () {
 
 workProcedure.prototype._createSubViewer = function () {
     var _this = this;
-    // var models = ["front_door_assy.scz"];
-    // getEndpoint({type: "collection", models: models, initial: "front_door_assy.scz"}).then((data) => {
-    //     if (data == 'error: 429 - Too many requests') {
-    //         window.location.replace("/error/too-many-requests");
-    //     }
 
-        _this._subViewer = new Communicator.WebViewer({
-            containerId: "subContainer",
-            endpointUri: './model_data/front_door_assy.scs',
-        });
+    _this._subViewer = new Communicator.WebViewer({
+        containerId: "subContainer",
+        endpointUri: './model_data/front_door_assy.scs',
+    });
 
-        function modelStrReady() {
-            _this._subViewCtrl = new subViewControl(_this._subViewer);
-            _this._subViewCtrl.start();
-            _this.showPartProperties(22);
-        }
+    function modelStrReady() {
+        _this._subViewCtrl = new subViewControl(_this._subViewer);
+        _this._subViewCtrl.start();
+        _this.showPartProperties(22);
+    }
 
-        _this._subViewer.setCallbacks({
-            sceneReady: sceneReadyFunc,
-            modelStructureReady: modelStrReady
-        });
-        _this._subViewer.start()
-    // });
+    _this._subViewer.setCallbacks({
+        sceneReady: sceneReadyFunc,
+        modelStructureReady: modelStrReady
+    });
+    _this._subViewer.start()
 
     function sceneReadyFunc() {
         _this._subViewer.getView().setBackgroundColor(
@@ -626,7 +630,7 @@ workProcedure.prototype.showPartProperties = function (partID) {
     }
     var camera = _this._mainViewer.getView().getCamera();
     _this._subViewCtrl.showParts(nodeIDs, camera);
-}
+};
 
 workProcedure.prototype.clearSelection = function () {
     var _this = this;
@@ -673,31 +677,4 @@ workProcedure.prototype._controlScrollButtons = function () {
     }
 };
 
-function incrementQty(obj) {
-    var tr = obj.parentNode.parentNode;
-    var childlen = tr.childNodes;
-    var qty = childlen[2].innerHTML;
-    qty++;
-    childlen[2].innerHTML = qty;
-}
 
-function decrementQty(obj) {
-    var tr = obj.parentNode.parentNode;
-    var childlen = tr.childNodes;
-    var qty = childlen[2].innerHTML;
-    if (qty == 1) {
-        tr.parentNode.deleteRow(tr.sectionRowIndex);
-    } else {
-        qty--;
-        childlen[2].innerHTML = qty;
-    }
-}
-
-function cartRowSelection() {
-    var tr = this;
-    workProcedure.clearSelection();
-    workProcedure.showPartProperties(tr.id);
-    workProcedure.clearTableRowColor()
-    tr.style.color = "#000000";
-    tr.style.backgroundColor = "#ff8080";
-}
